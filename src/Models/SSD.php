@@ -2,20 +2,27 @@
 
 namespace LSM\Models;
 
-class SSD
+use JetBrains\PhpStorm\Pure;
+use LSM\Models\Interfaces\StorageModelInterface;
+
+class SSD implements StorageModelInterface
 {
-    const COST_PER_GB = 0.1;
-    const MIN_STORAGE_INCREMENT = 1000;
-    const STUDY_TO_MB_RATIO = 10;
+    private const COST_PER_GB = 0.1;
+    private const MIN_STORAGE_INCREMENT = 1000;
+    private const STUDY_TO_MB_RATIO = 10;
 
-    public function __construct(private int $studies) {}
+    public function __construct(private int $studies)
+    {
+    }
 
-    public function computeCostMonthly()
+    #[Pure]
+    public function computeMonthlyCost(): float | int
     {
         return $this->storageRequiredInGb() * self::COST_PER_GB;
     }
 
-    public function storageRequiredInGb()
+    #[Pure]
+    public function storageRequiredInGb(): float
     {
         return ceil(($this->studies * self::STUDY_TO_MB_RATIO) / self::MIN_STORAGE_INCREMENT);
     }
