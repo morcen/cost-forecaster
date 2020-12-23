@@ -2,29 +2,25 @@
 
 namespace LSM;
 
-use LSM\Controllers\ForecastController;
-use LSM\Controllers\IndexController;
+use LSM\Controllers\BaseController;
+use LSM\Services\RouteService;
 
 class Application
 {
     /**
-     * @return string
+     * @return ?BaseController
      * @throws \Exception
      */
-    public function run(): string | null
+    public function run(): ?BaseController
     {
-        $uri = $_SERVER['REQUEST_URI'];
+        $method = $_SERVER['REQUEST_METHOD'];
 
-        switch ($uri) {
-            case '/' && $_SERVER['REQUEST_METHOD'] === 'GET':
-                return (new IndexController())();
-            case '/compute'  && $_SERVER['REQUEST_METHOD'] === 'POST':
-                $data = (array)json_decode(file_get_contents('php://input')) ?? $_POST;
-
-                return (new ForecastController())($data);
+        $controller = RouteService::route($_SERVER['REQUEST_URI'], $method);
+        if (in_array($method, ['POST', 'PUT'])) {
+            $data = (array)json_decode(file_get_contents('php://input')) ?? $_POST ?? [];
+            return (new $controller())($data);
         }
 
-        header("HTTP/1.0 404 Not Found");
-        echo '404 Route not found';
+        return (new $controller())();
     }
 }

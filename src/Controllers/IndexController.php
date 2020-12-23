@@ -2,7 +2,7 @@
 
 namespace LSM\Controllers;
 
-class IndexController
+final class IndexController implements BaseController
 {
     public function __invoke()
     {

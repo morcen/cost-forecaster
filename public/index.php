@@ -7,5 +7,10 @@ define('ASSETS', DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR);
 
 include_once ROOT . 'vendor/autoload.php';
 
-$application = new \LSM\Application();
-$application->run();
+try {
+    $application = new \LSM\Application();
+    $application->run();
+} catch(Exception $e) {
+    header("HTTP/1.0 {$e->getCode()}");
+    echo $e->getMessage();
+}

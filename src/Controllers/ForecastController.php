@@ -2,44 +2,51 @@
 
 namespace LSM\Controllers;
 
+use LSM\Models\Forms\ForecastForm;
 use LSM\Models\RAM;
 use LSM\Models\Serializables\ForecastCollection;
 use LSM\Models\Serializables\MonthlyForecast;
 use LSM\Models\SSD;
+use LSM\Services\ValidationService;
 
-class ForecastController
+final class ForecastController implements BaseController
 {
+    private int $studyCount;
+    private float | int $studyGrowth;
+    private int $months;
+
     /**
      * @param  array  $request
      */
     public function __invoke(array $request)
     {
-        $collection = $this->generateForecastCollection($request);
+        $validation = new ValidationService(new ForecastForm());
+        $validation->validate($request);
+
+        $this->studyCount = $request['studyCount'];
+        $this->studyGrowth = $request['studyGrowth'] / 100; // from percentage to decimal
+        $this->months = $request['months'];
+
+        $collection = $this->generateForecastCollection();
 
         header('Content-Type: application/json');
         echo json_encode($collection);
     }
 
     /**
-     * @param  array  $request
      * @return ForecastCollection
      */
-    private function generateForecastCollection(array $request): ForecastCollection
+    private function generateForecastCollection(): ForecastCollection
     {
-        /**
-         * @var $studyCount
-         * @var $studyGrowth
-         * @var $months
-         */
-        extract($request);
-
-        $studies = $studyCount;
-        $growth = $studyGrowth / 100.00;
-
         //prevents inaccuracies when ran during 30th/31st
         $currentMonth = (new \DateTimeImmutable())->modify('first day of this month');
+
         $collection = new ForecastCollection([]);
-        for ($month = 1; $month <= $months; $month++) {
+        for (
+            $studies = $this->studyCount, $month = 1;
+            $month <= $this->months;
+            $month++, $studies = $this->growthByMonth($month)
+        ) {
             // forecast starts from next month
             $forecastingMonth = $currentMonth->add(new \DateInterval("P{$month}M"));
 
@@ -47,10 +54,17 @@ class ForecastController
             $ssdCost = (new SSD($studies))->computeMonthlyCost();
 
             $collection->add(new MonthlyForecast($forecastingMonth, $studies, $ramCost + $ssdCost));
-
-            $studies = $studyCount * (1 + $growth * $month );
         }
 
         return $collection;
+    }
+
+    /**
+     * @param $month
+     * @return float|int
+     */
+    private function growthByMonth($month): float | int
+    {
+        return $this->studyCount * (1 + $this->studyGrowth * $month);
     }
 }
