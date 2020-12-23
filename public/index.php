@@ -1,52 +1,11 @@
 <?php
+include_once '../vendor/autoload.php';
 
-class RAM
-{
-    const COST_PER_GIG_PER_HOUR = 0.00553;
-    const RAM_INCREMENT = 500;
-    const STUDIES_TO_RAM_RATIO = 0.5;
 
-    public function __construct(private int $studies) {}
-
-    /**
-     * @param  int  $days
-     * @return float|int
-     */
-    public function computeCostByDays(int $days)
-    {
-        return $this->totalRAMHourlyCost()
-            * 24 // daily cost
-            * $days;
-    }
-
-    public function totalRAM()
-    {
-        return ceil(($this->studies * self::STUDIES_TO_RAM_RATIO) / self::RAM_INCREMENT) * self::RAM_INCREMENT ;
-    }
-
-    public function totalRAMHourlyCost()
-    {
-        return ($this->totalRAM() / 1000) * self::COST_PER_GIG_PER_HOUR;
-    }
-}
 
 class Storage
 {
-    const COST_PER_GB = 0.1;
-    const MIN_STORAGE_INCREMENT = 1000;
-    const STUDY_TO_MB_RATIO = 10;
 
-    public function __construct(private int $studies) {}
-
-    public function computeCostMonthly()
-    {
-        return $this->storageRequiredInGb() * self::COST_PER_GB;
-    }
-
-    public function storageRequiredInGb()
-    {
-        return ceil(($this->studies * self::STUDY_TO_MB_RATIO) / self::MIN_STORAGE_INCREMENT);
-    }
 }
 
 if (!empty($_POST)) {
@@ -68,10 +27,10 @@ if (!empty($_POST)) {
         $currentMonth = (new DateTime())->modify('+' . $month . ' month');
         $daysInMonth = $currentMonth->format('t');
 
-        $ramCost = (new RAM($study))->computeCostByDays($daysInMonth);
+        $ramCost = (new \LSM\Models\RAM($study))->computeCostByDays($daysInMonth);
 //        $storageCost = $study * Storage::STUDY_TO_STORAGE_RATIO * Storage::COST_PER_GB;
 //        $storageCost = ($study * .5) / 1000 * 0.1;
-        $storageCost = (new Storage($study))->computeCostMonthly();
+        $storageCost = (new \LSM\Models\SSD($study))->computeCostMonthly();
         echo '<tr>';
         echo '<td>' . $currentMonth->format('M Y') . "|$daysInMonth" . '</td>';
         echo '<td>' . $study . '</td>';

@@ -1,0 +1,19 @@
+{
+  "name": "morcen/lms",
+  "description": "Cost forecaster for LMS",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Morris Chavez",
+      "email": "morris@fastfwd.com"
+    }
+  ],
+  "require": {
+    "php": ">=8"
+  },
+  "autoload": {
+    "psr-4": {
+      "LSM\\" : "src/"
+    }
+  }
+}
