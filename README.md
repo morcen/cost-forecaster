@@ -2,6 +2,8 @@
 
 Forecast the cost of LMS infrastructure based on customer usage and expected growth.
 
+![LMS Forecaster thumbnail](https://github.com/morcen/lms-forecaster/blob/master/public/assets/images/thumbnail.png)
+
 ## Tech stack
 - Docker
 - PHP 8

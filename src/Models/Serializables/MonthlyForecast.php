@@ -26,7 +26,7 @@ class MonthlyForecast implements \JsonSerializable
     {
         return [
             'month' => $this->month->format(self::DATE_FORMAT),
-            'studies' => ceil($this->studies),
+            'studies' => number_format(ceil($this->studies)),
             'cost' => $this->convertedToCurrency($this->cost)
         ];
     }
