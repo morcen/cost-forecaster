@@ -1,3 +1,34 @@
+<?php
+if (!empty($_POST)) {
+    $now = new DateTime();
+
+    /**
+     * @var $studyCount
+     * @var $studyGrowth
+     * @var $months
+     */
+    extract($_POST);
+
+    $study = $studyCount;
+    $studyGrowth /= 100;
+
+    echo '<table>';
+    echo '<tbody>';
+    for ($month = 1; $month <= $months; $month++) {
+
+        $study = $study * (1 + $studyGrowth * $month );
+        $ramCost = 0.0053 * 24 * 30 * ($study/2); // say one month is 30 days
+        $storageCost = $study/1000 * .1; // $0.10 per 1GB
+        echo '<tr>';
+        echo '<td>' . $now->modify('+' . $month . ' month')->format('M Y') . '</td>';
+        echo '<td>' . $study . '</td>';
+        echo '<td>' . $ramCost + $storageCost . '</td>';
+        echo '</tr>';
+    }
+    echo '</tbody>';
+    echo '</table>';
+}
+?>
 <html>
 <body>
 <div class="container">
