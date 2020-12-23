@@ -9,7 +9,9 @@
     }
   ],
   "require": {
-    "php": ">=8"
+    "php": ">=8",
+    "ext-intl": "*",
+    "ext-json": "*"
   },
   "autoload": {
     "psr-4": {
