@@ -17,7 +17,7 @@ class MonthlyForecast implements \JsonSerializable
     private function convertedToCurrency(string $local = 'en_US', string $currency = 'USD'): string
     {
         $formatter = new \NumberFormatter($local, \NumberFormatter::CURRENCY);
-
+        $formatter->setTextAttribute(\NumberFormatter::CURRENCY_CODE, $currency);
         return $formatter->formatCurrency($this->cost, $currency);
     }
 
@@ -27,7 +27,7 @@ class MonthlyForecast implements \JsonSerializable
         return [
             'month' => $this->month->format(self::DATE_FORMAT),
             'studies' => number_format(ceil($this->studies)),
-            'cost' => $this->convertedToCurrency($this->cost)
+            'cost' => $this->convertedToCurrency()
         ];
     }
 }
