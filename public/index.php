@@ -30,6 +30,25 @@ class RAM
     }
 }
 
+class Storage
+{
+    const COST_PER_GB = 0.1;
+    const MIN_STORAGE_INCREMENT = 1000;
+    const STUDY_TO_MB_RATIO = 10;
+
+    public function __construct(private int $studies) {}
+
+    public function computeCostMonthly()
+    {
+        return $this->storageRequiredInGb() * self::COST_PER_GB;
+    }
+
+    public function storageRequiredInGb()
+    {
+        return ceil(($this->studies * self::STUDY_TO_MB_RATIO) / self::MIN_STORAGE_INCREMENT);
+    }
+}
+
 if (!empty($_POST)) {
     $now = new DateTime();
 
@@ -51,11 +70,12 @@ if (!empty($_POST)) {
 
         $ramCost = (new RAM($study))->computeCostByDays($daysInMonth);
 //        $storageCost = $study * Storage::STUDY_TO_STORAGE_RATIO * Storage::COST_PER_GB;
-        $storageCost = ($study * .5) / 1000 * 0.1;
+//        $storageCost = ($study * .5) / 1000 * 0.1;
+        $storageCost = (new Storage($study))->computeCostMonthly();
         echo '<tr>';
         echo '<td>' . $currentMonth->format('M Y') . "|$daysInMonth" . '</td>';
         echo '<td>' . $study . '</td>';
-        echo '<td>' . $ramCost . '|' . $storageCost . ' </td>';
+        echo '<td>' . $ramCost + $storageCost . ' </td>';
         echo '</tr>';
 
         $study = $studyCount * (1 + $studyGrowth * $month );
