@@ -1,6 +1,6 @@
 <?php
 
-namespace LSM\Controllers;
+namespace Forecost\Controllers;
 
 interface BaseController
 {

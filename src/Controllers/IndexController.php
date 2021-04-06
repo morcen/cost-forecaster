@@ -1,6 +1,6 @@
 <?php
 
-namespace LSM\Controllers;
+namespace Forecost\Controllers;
 
 final class IndexController implements BaseController
 {

@@ -1,13 +1,13 @@
 <?php
 
-namespace LSM\Controllers;
+namespace Forecost\Controllers;
 
-use LSM\Models\Forms\ForecastForm;
-use LSM\Models\RAM;
-use LSM\Models\Serializables\ForecastCollection;
-use LSM\Models\Serializables\MonthlyForecast;
-use LSM\Models\SSD;
-use LSM\Services\ValidationService;
+use Forecost\Models\Forms\ForecastForm;
+use Forecost\Models\RAM;
+use Forecost\Models\Serializables\ForecastCollection;
+use Forecost\Models\Serializables\MonthlyForecast;
+use Forecost\Models\SSD;
+use Forecost\Services\ValidationService;
 
 final class ForecastController implements BaseController
 {

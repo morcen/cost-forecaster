@@ -6,7 +6,7 @@ define('ASSETS', DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR);
 include_once ROOT . 'vendor/autoload.php';
 
 try {
-    $application = new \LSM\Application();
+    $application = new \Forecost\Application();
     $application->run();
 } catch (Exception $e) {
     header("HTTP/1.0 {$e->getCode()}");

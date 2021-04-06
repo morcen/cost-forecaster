@@ -1,6 +1,6 @@
 {
-  "name": "morcen/lms",
-  "description": "Cost forecaster for LMS",
+  "name": "morcen/cost-forecaster",
+  "description": "Cost forecaster for server infrastructure",
   "type": "project",
   "authors": [
     {
@@ -15,7 +15,10 @@
   },
   "autoload": {
     "psr-4": {
-      "LSM\\" : "src/"
+      "Forecost\\" : "src/"
     }
+  },
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.5"
   }
 }

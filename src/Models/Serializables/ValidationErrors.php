@@ -1,6 +1,6 @@
 <?php
 
-namespace LSM\Models\Serializables;
+namespace Forecost\Models\Serializables;
 
 class ValidationErrors implements \JsonSerializable
 {

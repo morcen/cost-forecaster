@@ -1,6 +1,6 @@
 <?php
 
-namespace LSM\Models\Serializables;
+namespace Forecost\Models\Serializables;
 
 use JetBrains\PhpStorm\ArrayShape;
 use JetBrains\PhpStorm\Pure;

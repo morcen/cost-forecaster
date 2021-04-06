@@ -1,9 +1,9 @@
 <?php
 
-namespace LSM;
+namespace Forecost;
 
-use LSM\Controllers\BaseController;
-use LSM\Services\RouteService;
+use Forecost\Controllers\BaseController;
+use Forecost\Services\RouteService;
 
 class Application
 {

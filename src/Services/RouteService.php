@@ -1,10 +1,10 @@
 <?php
 
-namespace LSM\Services;
+namespace Forecost\Services;
 
-use LSM\Controllers\BaseController;
-use LSM\Controllers\ForecastController;
-use LSM\Controllers\IndexController;
+use Forecost\Controllers\BaseController;
+use Forecost\Controllers\ForecastController;
+use Forecost\Controllers\IndexController;
 
 class RouteService
 {

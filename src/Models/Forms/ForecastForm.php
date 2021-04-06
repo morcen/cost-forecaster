@@ -1,9 +1,9 @@
 <?php
 
-namespace LSM\Models\Forms;
+namespace Forecost\Models\Forms;
 
 use JetBrains\PhpStorm\ArrayShape;
-use LSM\Models\Interfaces\FormInterfaces;
+use Forecost\Models\Interfaces\FormInterfaces;
 
 class ForecastForm implements FormInterfaces
 {

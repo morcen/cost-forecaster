@@ -1,6 +1,6 @@
 <?php
 
-namespace LSM\Models\Interfaces;
+namespace Forecost\Models\Interfaces;
 
 interface StorageModelInterface
 {

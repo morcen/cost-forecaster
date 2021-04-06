@@ -1,9 +1,9 @@
 <?php
 
-namespace LSM\Models;
+namespace Forecost\Models;
 
 use JetBrains\PhpStorm\Pure;
-use LSM\Models\Interfaces\StorageModelInterface;
+use Forecost\Models\Interfaces\StorageModelInterface;
 
 class SSD implements StorageModelInterface
 {

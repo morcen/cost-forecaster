@@ -1,9 +1,9 @@
 <?php
 
-namespace LSM\Services;
+namespace Forecost\Services;
 
-use LSM\Models\Interfaces\FormInterfaces;
-use LSM\Models\Serializables\ValidationErrors;
+use Forecost\Models\Interfaces\FormInterfaces;
+use Forecost\Models\Serializables\ValidationErrors;
 
 class ValidationService
 {
