@@ -1,8 +1,8 @@
-# LMS Forecaster
+# Cost Forecaster
 
-Forecast the cost of LMS infrastructure based on customer usage and expected growth.
+Forecast the cost of infrastructure based on customer usage and expected growth.
 
-![LMS Forecaster thumbnail](https://github.com/morcen/lms-forecaster/blob/master/public/assets/images/thumbnail.png)
+![Cost Forecaster thumbnail](https://github.com/morcen/cost-forecaster/blob/master/public/assets/images/thumbnail.png)
 
 ## Tech stack
 - Docker
@@ -21,7 +21,7 @@ $ docker-compose up -d
 
 - Generate autoload files
 ```bash
-$ docker exec -it lsm-forecaster-php-fpm  composer dumpautoload
+$ docker exec -it cost-forecaster-php-fpm  composer dumpautoload
 ```
 
 - Confirm setup by checking in the browser at http://localhost:8080/
